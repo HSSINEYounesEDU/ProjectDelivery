@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: DeliveryProject
+    ports:
+      - "5433:5433"
+
+  backend:
+    build:
+      context: ./Delivery-Project-Backend
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_started
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5434/DeliveryProject
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 100
+
+  frontend:
+    build:
+      context: ./Delivery-Project-Frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_started
