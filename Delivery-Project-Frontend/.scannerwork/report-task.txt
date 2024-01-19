@@ -1,0 +1,7 @@
+organization=testsonarproject101
+projectKey=testsonarproject101_deliveryproject
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.51767
+dashboardUrl=https://sonarcloud.io/dashboard?id=testsonarproject101_deliveryproject
+ceTaskId=AYy89ffew9aIP1mwWXqN
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYy89ffew9aIP1mwWXqN

@@ -1,0 +1,81 @@
+<main>
+
+    <!-- DISPLAY OF TRAJECTS -->
+    <div  *ngIf="page==0" class=" border rounded-lg shadow m-2 min-h-screen">
+        <div class="flex justify-between  my-2 mx-2">
+            <div>
+                <input class="rounded-lg w-60 pl-4 h-10 text-black mr-2" placeholder="Start" [(ngModel)]="source" (ngModelChange)="onSearchSource()"/>
+                <input class="rounded-lg w-60 pl-4 h-10 text-black mr-2" placeholder="Destination" [(ngModel)]="destination" (ngModelChange)="onSearchDestination()"/>
+            </div>
+            <button class="bg-gray-500 text-white rounded-sm h-10 w-40" (click)="page=1">Create traject</button>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="flex flex-column items-center my-4 text-xs">
+            <ul class="flex">
+                <li class="w-60 bg-red-300 h-8 text-center pt-2 rounded-tl-lg">Source</li>
+                <li class="bg-red-500 h-8 text-center pt-2 " style="width: 900px;">Road</li>
+                <li class="w-60 bg-red-300 h-8 text-center pt-2 rounded-tr-lg ">Destination</li>
+            </ul>
+            <div class="grid grid-cols-1 divide-y divide-slate-700">
+                <ul *ngFor="let traject of displayedTrajects" class="flex">
+                    <li class="w-60 bg-slate-200 h-8 pl-2 pt-2">{{traject.source}}</li>
+                    <li class="bg-slate-100 h-8 pl-2 pt-2 flex"  style="width: 900px;">{{traject.road}}</li>
+                    <li class="w-60 bg-slate-200 h-8 pl-2 pt-2">{{traject.destination}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW TRAJECT -->
+    
+
+    <div *ngIf="page==1">
+
+        <div class="my-2 mx-2">
+            <button class="bg-gray-500 text-white rounded-lg h-10 w-40" (click)="page = 0">Back</button>
+        </div>
+
+        <div class="flex flex-column border rounded-sm shadow text-sm mx-2">
+            <p class="pl-10 pt-4 text-xl">New traject:</p>
+            <div class="dropdown-divider"></div>
+            <div class="grid grid-cols-2">
+                <div>
+                    <select class="rounded-lg my-2 mx-20"  [(ngModel)]="source">
+                        <option disabled selected value="">From</option>
+                        <option *ngFor="let city of cities">{{city}}</option>
+                    </select>
+                    <select class="rounded-lg my-2 mx-20" [(ngModel)]="newCity" (change)="addCityToRoad()">
+                        <option disabled selected value="">Road</option>
+                        <option *ngFor="let city of cities">{{city}}</option>
+                    </select>
+                    <select class="rounded-lg my-2 mx-20"  [(ngModel)]="destination">
+                        <option disabled selected value="">Destination</option>
+                        <option *ngFor="let city of cities">{{city}}</option>
+                    </select>
+                </div>
+                <div class="ml-20">
+                    <div class="flex">
+                        <label class="w-52 bg-red-300 h-10 text-center pt-2 rounded-tl-lg">Source</label>
+                        <label class="w-52 bg-gray-300 h-10 text-center pt-2 rounded-tr-lg">{{source}}</label>
+                    </div>
+                    <div class="flex">
+                        <label  class="w-52 bg-gray-300 text-center py-2">Road cities</label>
+                        <div class="flex flex-column w-52 bg-red-300 text-center pt-2 mb-2">
+                            <label *ngFor="let city of road">{{city}}</label>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <label  class="w-52 bg-red-300 h-10 text-center pt-2 rounded-bl-lg">Destination</label>
+                        <label  class="w-52 bg-gray-300 h-10 text-center pt-2 rounded-br-lg">{{destination}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="flex justify-end">   
+                <button class="bg-green-600 mx-20 text-white rounded-lg h-10 mb-3 w-40" (click)="onSubmit()">Create</button>
+
+            </div>
+        </div>
+    </div>
+
+</main>

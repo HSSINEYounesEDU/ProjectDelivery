@@ -1,0 +1,68 @@
+<main>
+
+    <!-- DISPLAY OF TRUCKS -->
+    <div  *ngIf="page==0" class=" border rounded-lg shadow m-2 min-h-screen">
+        <div class="flex justify-between  my-2 mx-2">
+            <div>
+                <input class="rounded-lg w-60 pl-4 h-10 text-black mr-2" placeholder="Search by lastname"  [(ngModel)]="search" (ngModelChange)="onSearchChange()"/>
+            </div>
+            <button class="bg-gray-500 text-white rounded-sm h-10 w-40" (click)="page=1">Create driver</button>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="flex flex-column items-center my-4 text-xs">
+            <ul class="flex">
+                <li class="w-52 bg-red-300 h-8 text-center pt-2 rounded-tl-lg">Firstname</li>
+                <li class="w-52 bg-red-500 h-8 text-center pt-2 ">Lastname</li>
+                <li class="w-80 bg-red-300 h-8 text-center pt-2 ">Email</li>
+                <li class="w-60 bg-red-500 h-8 text-center pt-2 ">Phone number</li>
+                <li class="w-60 bg-red-300 h-8 text-center pt-2 ">CIN</li>
+                <li class="w-60 bg-red-500 h-8 text-center pt-2 rounded-tr-lg">Status</li>
+                
+            </ul>
+            <div class="grid grid-cols-1 divide-y divide-slate-700">
+                <ul *ngFor="let driver of displayedDrivers" class="flex">
+                    <li class="w-52 bg-slate-300 h-8 pl-2 pt-2">{{driver.firstname}}</li>
+                    <li class="w-52 bg-slate-100 h-8 pl-2 pt-2 ">{{driver.lastname}}</li>
+                    <li class="w-80 bg-slate-300 h-8 pl-2 pt-2 ">{{driver.email}}</li>
+                    <li class="w-60 bg-slate-100 h-8 pl-2 pt-2">{{driver.phoneNumber}}</li>
+                    <li class="w-60 bg-slate-300 h-8 pl-2 pt-2">{{driver.cin}}</li>
+                    <li class="w-60 bg-slate-100 h-8">
+                        <select class="h-8 w-60" [(ngModel)]="driver.enabled" (change)="onDriverEnabledChange(driver.id)">
+                            <option value="true">On service</option>
+                            <option value="false">Out of service</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW DRIVER -->
+    
+
+    <div *ngIf="page==1">
+
+        <div class="my-2 mx-2">
+            <button class="bg-gray-500 text-white rounded-lg h-10 w-40">Back</button>
+        </div>
+
+        <div class="flex flex-column border rounded-sm shadow text-sm mx-2">
+            <p class="pl-10 pt-4 text-xl">New driver:</p>
+            <div class="dropdown-divider"></div>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="firstname" placeholder="firstname"/>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="lastname" placeholder="Lastname"/>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="email" placeholder="Email"/>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="phoneNumber" placeholder="Phone number"/>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="cin" placeholder="CIN"/>
+            <div class="dropdown-divider"></div>
+            <div *ngIf="!valid">
+                <p class="px-20 text-red-500 text-sm mt-2">Fill the fields correctly</p>
+            </div>
+            <div class="flex justify-end">   
+                <button class="bg-green-600 mx-20 text-white rounded-lg h-10 mb-3 w-40" (click)="onSubmit()">Create</button>
+
+            </div>
+        </div>
+    </div>
+
+</main>

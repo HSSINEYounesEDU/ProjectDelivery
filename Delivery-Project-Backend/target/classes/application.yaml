@@ -1,0 +1,32 @@
+
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    protocol: ${MAIL_PROTOCOL}
+    properties.mail.smtp:
+      auth: ${MAIL_SMTP_AUTH}
+      starttls.enable: ${MAIL_SMTP_STARTTLS_ENABLE}
+      ssl.trust: ${MAIL_HOST}
+
+application:
+  jwt:
+    secretKey: ${JWT_SECRET_KEY}
+    tokenExpirationAfterHours: ${JWT_EXPIRATION_TIME_HOURS}
+  password-refresh-token:
+    expiration-time: ${PASSWORD_RECOVERY_TOKEN_TIME_HOURS}

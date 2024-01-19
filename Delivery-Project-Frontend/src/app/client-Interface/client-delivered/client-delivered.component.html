@@ -1,0 +1,31 @@
+<div *ngIf="allowed">
+    
+    <nav class="flex justify-between bg-stone-800 text-white h-20 items-center">
+
+        <div class="flex itmes-center ml-6">
+            <p  class="text-orange-300 text-2xl">logo</p>
+            <p  class="text-orange-300 text-md pl-1 mt-2">Client</p>
+        </div>
+        <div>
+            <input class="rounded-lg w-60 pl-4 h-10 text-black" placeholder="Search"/>
+        </div>
+
+        <div>
+            <ul class="flex">
+                <li class="cursor-pointer hover:text-orange-400 mx-3" (click)="toInProgress()"><a>In Progress</a></li>
+                <li class="cursor-pointer text-orange-400 hover:text-orange-400 mx-3"><a>Delivered</a></li>
+                <li class="cursor-pointer hover:text-orange-400 mx-3" (click)="toAccount()"><a>Account</a></li>
+                <li class="cursor-pointer hover:text-orange-400 ml-3 mr-8" (click)="onLogout()"><a>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        Delivered
+    </main>
+
+</div>
+
+<div *ngIf="!allowed" class="h-screen flex justify-center items-center">
+    ACCESS DENIED.
+</div>

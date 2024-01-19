@@ -1,0 +1,48 @@
+<div *ngIf="allowed">
+    <nav class="flex justify-between bg-stone-800 text-white h-20 items-center">
+        <div class="flex itmes-center ml-6">
+            <p  class="text-orange-300 text-2xl">logo</p>
+            <p  class="text-orange-300 text-md pl-1 mt-2">Checkpoint</p>
+        </div>
+    
+        <div class="flex">
+            <select class="form-select rounded-lg text-black w-52 h-10" aria-label="Default select example" [(ngModel)]="page">
+                <option  value="packageInProgress" value="0">Deliveries in progress</option>
+                <option value="packageDelivered" value="1">Delivered packages</option>
+                <option value="packageDelivered" value="2">Send cargo</option>
+                <option value="packageDelivered" value="3">Receive cargo</option>
+            </select>
+        </div>
+    
+        <div>
+            <ul class="flex">
+                <li class="cursor-pointer hover:text-orange-400 ml-3 mr-8" (click)="onLogout()"><a>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        
+        <div *ngIf="page=='0'">
+            <app-checkpoint-in-progress></app-checkpoint-in-progress>
+        </div>
+
+        <div *ngIf="page=='1'">
+            <app-checkpoint-delivered></app-checkpoint-delivered>
+        </div>
+
+        <div *ngIf="page=='2'">
+            <app-checkpoint-send-cargo></app-checkpoint-send-cargo>
+        </div>
+
+        <div *ngIf="page=='3'">
+            <app-checkpoint-receive-cargo></app-checkpoint-receive-cargo>
+        </div>
+
+    </main>
+</div>
+
+<div *ngIf="!allowed" class="h-screen flex justify-center items-center">
+    ACCESS DENIED.
+</div>
+

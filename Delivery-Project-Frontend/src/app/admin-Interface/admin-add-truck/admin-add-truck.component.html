@@ -1,0 +1,61 @@
+<main>
+
+    <!-- DISPLAY OF TRUCKS -->
+    <div  *ngIf="page==0"  class=" border rounded-lg shadow m-2 min-h-screen">
+        <div class="flex justify-between  my-2 mx-2">
+            <div>
+                <input class="rounded-lg w-60 pl-4 h-10 text-black mr-2" placeholder="Search by reference"  [(ngModel)]="search" (ngModelChange)="onSearchChange()"/>
+            </div>
+            <button class="bg-gray-500 text-white rounded-sm h-10 w-40" (click)="page=1">Create truck</button>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="flex flex-column items-center my-4 text-xs">
+            <ul class="flex">
+                <li class="w-60 bg-red-300 h-8 text-center pt-2 rounded-tl-lg">Reference</li>
+                <li class="w-60 bg-red-500 h-8 text-center pt-2 ">Registration number</li>
+                <li class="w-80 bg-red-300 h-8 text-center pt-2  rounded-tr-lg">Driver</li>
+            </ul>
+            <div class="grid grid-cols-1 divide-y divide-slate-700">
+                <ul *ngFor="let truck of displayedTrucks" class="flex">
+                    <li class="w-60 bg-slate-300 h-8 pl-2 pt-2">{{truck.reference}}</li>
+                    <li class="w-60 bg-slate-200 h-8 pl-2 pt-2 ">{{truck.registrationNumber}}</li>
+                    <li class="w-80 bg-slate-300 h-8 flex justify-between">
+                        <p *ngIf="truck.driver!=null" class="pt-2 pl-2">{{truck.driver.firstname +" "+ truck.driver.lastname }}</p>
+                        <p *ngIf="truck.driver==null" class="pt-2 pl-2">Not assigned</p>
+                        <select class="w-8 h-8"  [(ngModel)]="option" (change)="onTruckUpdate(truck)">
+                            <option value="0">Not assigned</option>
+                            <option *ngFor="let driver of drivers" [ngValue]="driver.id">{{driver.firstname + " " + driver.lastname }}</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW TRUCK -->
+    
+
+    <div *ngIf="page==1">
+
+        <div class="my-2 mx-2">
+            <button class="bg-gray-500 text-white rounded-lg h-10 w-40" (click)="page=0">Back</button>
+        </div>
+        
+        <div class="flex flex-column border rounded-sm shadow text-sm mx-2">
+            <p class="pl-10 pt-4 text-xl">New truck:</p>
+            <div class="dropdown-divider"></div>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="reference" placeholder="Reference"/>
+            <input class="rounded-lg my-2 mx-20" [(ngModel)]="registrationNumber" placeholder="Registration number"/>
+            <select  class="rounded-lg my-2 mx-20" [(ngModel)]="driver" >
+                <option value="0">Not assigned</option>
+                <option *ngFor="let driver of drivers" [ngValue]="driver.id">{{driver.firstname + " " + driver.lastname }}</option>
+            </select>
+            <div class="dropdown-divider"></div>
+            <div class="flex justify-end">   
+                <button class="bg-green-600 mx-20 text-white rounded-lg h-10 mb-3 w-40" (click)="onSubmit()">Create</button>
+
+            </div>
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,64 @@
+<main>
+
+    <main>
+
+        <!-- DISPLAY DELIVERIES IN PROGRESS -->
+    
+        <div class=" border rounded-lg shadow m-2 min-h-screen">
+            <div class="flex flex-column my-2 ">
+             
+                <select class="rounded-lg my-2 mx-2" [(ngModel)]="truckId">
+                    <option selected disabled value="">Truck reference</option>
+                    <option *ngFor="let truck of trucks" [value]="truck.id">{{truck.reference}}</option>
+                  </select>
+                  
+                  <select class="rounded-lg my-2 mx-2" [(ngModel)]="trajectId">
+                    <option selected disabled value="">Traject</option>
+                    <option *ngFor="let traject of trajects" [value]="traject.id">{{traject.source + " - " + traject.destination}}</option>
+                  </select>
+                  
+                <div class="flex justify-end mr-2">
+                    <button class="bg-green-500 text-white rounded-lg h-10 w-40" (click)="onSubmit()">Create cargo</button>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <div class="mx-2 flex">
+                <input class="rounded-lg w-60 pl-3 h-10 text-black mr-2" placeholder="Current location"  [(ngModel)]="currentLocation" (ngModelChange)="onSourceSearchChange()"/>
+            </div>
+            <div class="flex flex-column items-center my-2 text-xs divide-y devide-slate-700">
+                <ul class="flex">
+                    <li class="w-24 bg-green-300 h-8 text-center pt-2 rounded-tl-lg">Reference</li>
+                    <li class="w-64 bg-green-500 h-8 text-center pt-2 ">Description</li>
+                    <li class="w-20 bg-green-300 h-8 text-center pt-2 ">Weigth</li>
+                    <li class="w-60 bg-green-500 h-8 text-center pt-2 ">Client name</li>
+                    <li class="w-72 bg-green-300 h-8 text-center pt-2 ">Email</li>
+                    <li class="w-32 bg-green-500 h-8 text-center pt-2 ">Phone number</li>
+                    <li class="w-40 bg-green-300 h-8 text-center pt-2 ">Current location</li>
+                    <li class="w-40 bg-green-500 h-8 text-center pt-2 ">Next destination</li>
+                    <li class="w-20 bg-green-300 h-8 text-center pt-2 rounded-tr-lg ">Select</li>
+                    
+                    
+                </ul>
+                <ul *ngFor="let pack of packages" class="flex">
+                    <li class="w-24 bg-slate-300 h-8 pl-2 pt-2">{{pack.reference}}</li>
+                    <li class="w-64 bg-slate-100 h-8 pl-2 pt-2 ">{{pack.description}}</li>
+                    <li class="w-20 bg-slate-300 h-8 pl-2 pt-2 ">{{pack.weight + " Kg"}}</li>
+                    <li class="w-60 bg-slate-100 h-8 pl-2 pt-2">{{pack.client.firstname + " " + pack.client.lastname}}</li>
+                    <li class="w-72 bg-slate-300 h-8 pl-2 pt-2">{{pack.client.email}}</li>
+                    <li class="w-32 bg-slate-100 h-8 pl-2 pt-2 ">{{pack.client.phonenumber}}</li>
+                    <li class="w-40 bg-slate-300 h-8 pl-2 pt-2 ">{{pack.presentLocation}}</li>
+                    <li *ngFor="let city of pack.traject.road" class="bg-slate-100 h-8">
+                        <p class="w-40 pl-2 pt-2 " *ngIf="pack.traject.road.includes(pack.presentLocation) && pack.traject.road.indexOf(pack.presentLocation)+1 == pack.traject.road.indexOf(city) ">{{city}}</p>
+                        <p class="w-40 pl-2 pt-2 " *ngIf="!pack.traject.road.includes(pack.presentLocation) && city.startsWith(destination) && pack.traject.road.indexOf(city)==0">{{pack.traject.road[0]}}</p>
+                    </li>
+                    <li class="w-20 bg-slate-300 h-8 pt-2 flex justify-center">
+                        <input type="checkbox" (change)="onCheckboxChange($event, pack.id)"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+    </main>
+
+</main>

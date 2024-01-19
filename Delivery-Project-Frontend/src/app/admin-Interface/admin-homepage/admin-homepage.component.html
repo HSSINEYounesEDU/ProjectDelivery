@@ -1,0 +1,59 @@
+<main>
+
+        <div *ngIf="allowed">
+            <nav class="flex justify-between bg-stone-800 text-white h-20 items-center">
+                <div class="flex itmes-center ml-6">
+                    <p  class="text-orange-300 text-2xl">logo</p>
+                    <p  class="text-orange-300 text-md pl-1 mt-2">admin</p>
+                </div>
+            
+                <div class="flex">
+                    <select class="form-select rounded-lg text-black w-32 h-10" aria-label="Default select example" [(ngModel)]="page">
+                        <option selected value="0">Users</option>
+                        <option value="1">Drivers</option>
+                        <option value="2">Trucks</option>
+                        <option value="3">Trajects</option>
+                    </select>
+                </div>
+            
+                <div>
+                    <ul class="flex">
+                        <li class="cursor-pointer hover:text-orange-400 ml-3 mr-8" (click)="onLogout()"><a>Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+    
+            <main>
+    
+                <!-- USERS COMPONENTS -->
+                <div *ngIf="page==0">
+                    <app-admin-add-user></app-admin-add-user>
+                </div>
+    
+                <!-- DRIVERS COMPONENTS -->
+                <div *ngIf="page==1">
+                    <app-admin-add-driver></app-admin-add-driver>
+                </div>
+
+                
+                <!-- TRUCKS COMPONENTS -->
+                <div *ngIf="page==2">
+                    <app-admin-add-truck></app-admin-add-truck>
+                </div>
+
+                <!-- TRAJECTS COMPONENTS -->
+                <div *ngIf="page==3">
+                    <app-admin-add-traject></app-admin-add-traject>
+                </div>
+                
+    
+            </main>
+        </div>
+
+        <div *ngIf="!allowed" class="h-screen flex justify-center items-center">
+            ACCESS DENIED.
+        </div>
+
+</main>
+
+

@@ -1,0 +1,39 @@
+<main>
+
+    <!-- DISPLAY DELIVERIES IN PROGRESS -->
+    <div  class=" border rounded-lg shadow m-2 min-h-screen">
+        <div class="flex justify-between  my-2 mx-2">
+            <select class="rounded-lg my-2 mx-2" [(ngModel)]="truckId" (change)="onTruckChange()">
+                <option selected disabled value="">Truck reference</option>
+                <option *ngFor="let truck of trucks" [value]="truck.id">{{truck.reference}}</option>
+              </select>
+            <button class="bg-gray-500 text-white rounded-sm h-10 w-48" (click)="onReceive()">Received cargo</button>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="flex flex-column items-center my-4 text-xs divide-y devide-slate-700">
+            <ul class="flex">
+                <li class="w-24 bg-red-300 h-8 text-center pt-2 rounded-tl-lg">Reference</li>
+                <li class="w-80 bg-red-500 h-8 text-center pt-2 ">Description</li>
+                <li class="w-24 bg-red-300 h-8 text-center pt-2 ">Weigth</li>
+                <li class="w-80 bg-red-500 h-8 text-center pt-2 ">Client email</li>
+                <li class="w-40 bg-red-300 h-8 text-center pt-2 ">Phone number</li>
+                <li class="w-32 bg-red-500 h-8 text-center pt-2 rounded-tr-lg">Recieved</li>
+                
+            </ul>
+
+            <ul *ngFor="let pack of cargo.packages" class="flex">
+                <li *ngIf="pack.id!=0" class="w-24 bg-slate-300 h-8 text-center pt-2 ">{{pack.id}}</li>
+                <li *ngIf="pack.id!=0" class="w-80 bg-slate-100 h-8 text-center pt-2 ">{{pack.description}}</li>
+                <li *ngIf="pack.id!=0" class="w-24 bg-slate-300 h-8 text-center pt-2 ">{{pack.weight+ " Kg" }}</li>
+                <li *ngIf="pack.id!=0" class="w-80 bg-slate-100 h-8 text-center pt-2 ">{{pack.client.email}}</li>
+                <li *ngIf="pack.id!=0" class="w-40 bg-slate-300 h-8 text-center pt-2 ">{{pack.client.phonenumber}}</li>
+                <li *ngIf="pack.id!=0" class="w-32 bg-slate-100 h-8 pt-2 flex justify-center">
+                    <input type="checkbox" />
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+</main>

@@ -1,0 +1,21 @@
+<div *ngIf="!loggedIn">
+
+    <main class="flex justify-center">
+        <div class="mt-32">
+            <form class="flex flex-col px-4 py-6 border rounded-lg items-center">
+                    <input type="text" placeholder="Email" name="email" [(ngModel)]="email" class="w-64 rounded-lg color-gray my-2" />
+                    <input type="password" placeholder="Password" name="password" [(ngModel)]="password" class="w-64 rounded-lg color-gray my-2" />
+                    <button type="submit" value="Login" (click)="onLogin()" class="bg-cyan-500 text-white w-44 h-8 rounded-lg color-gray mt-4 mb-2">Login</button>
+                    <a class="text-xs cursor-pointer text-teal-500 hover:text-teal-700"  routerLink="/password-recuperation">Forgoten password?</a>
+                    <div class="w-40 bg-slate-400 mt-2" style="height: 1px;"></div>
+                    <button type="submit" value="submit" (click)="onSubmit()" class="bg-emerald-400 text-white w-44 h-8 rounded-lg color-gray mt-4 mb-2">Sign up</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<div *ngIf="loggedIn" class="h-screen flex justify-center items-center">
+    YOU ARE ALREADY CONNECTED.
+</div>
+    
+
